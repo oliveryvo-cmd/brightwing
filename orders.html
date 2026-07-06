@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BrightWing Orders — Private</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f9ff;font-family:'Nunito',Arial,sans-serif;min-height:100vh;padding:20px;}
+
+#lock{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:16px;}
+#lock h1{font-family:'Fredoka One',cursive;font-size:48px;color:#0ea5e9;}
+#lock p{color:#64748b;font-size:16px;}
+#lock input{padding:14px 20px;border:4px solid #000;border-radius:12px;font-size:20px;font-family:'Nunito',Arial,sans-serif;text-align:center;width:200px;outline:none;}
+#lock button{background:#0ea5e9;border:4px solid #000;border-radius:50px;padding:12px 36px;color:#fff;font-size:18px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 #000;font-family:'Nunito',Arial,sans-serif;}
+#lock .error{color:#ef4444;font-weight:900;display:none;}
+
+#dashboard{display:none;}
+.header{background:#fff;border:4px solid #000;border-radius:20px;padding:24px 30px;margin-bottom:24px;box-shadow:6px 6px 0 #000;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.header h1{font-family:'Fredoka One',cursive;font-size:36px;color:#0ea5e9;}
+.stats{display:flex;gap:20px;flex-wrap:wrap;}
+.stat{background:#e0f2fe;border:3px solid #000;border-radius:12px;padding:12px 20px;text-align:center;}
+.stat-num{font-family:'Fredoka One',cursive;font-size:32px;color:#0ea5e9;}
+.stat-label{font-size:12px;font-weight:900;color:#64748b;}
+
+.orders-grid{display:grid;gap:16px;}
+.order-card{background:#fff;border:4px solid #000;border-radius:16px;padding:20px 24px;box-shadow:5px 5px 0 #000;}
+.order-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.order-name{font-family:'Fredoka One',cursive;font-size:22px;color:#0ea5e9;}
+.order-box{background:#f59e0b;border:2px solid #000;border-radius:20px;padding:4px 14px;font-weight:900;font-size:14px;}
+.order-detail{font-size:14px;color:#64748b;margin-bottom:4px;}
+.order-detail strong{color:#1a1a1a;}
+.status-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.status-btn{border:2px solid #000;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:900;cursor:pointer;font-family:'Nunito',Arial,sans-serif;}
+.btn-pending{background:#fef9ee;color:#92400e;}
+.btn-packed{background:#e0f2fe;color:#0369a1;}
+.btn-delivered{background:#dcfce7;color:#166534;}
+.active{box-shadow:3px 3px 0 #000;}
+
+.add-btn{background:#8ac926;border:4px solid #000;border-radius:50px;padding:14px 32px;color:#fff;font-size:18px;font-weight:900;cursor:pointer;box-shadow:5px 5px 0 #000;font-family:'Nunito',Arial,sans-serif;margin-bottom:24px;}
+
+#addForm{background:#fff;border:4px solid #000;border-radius:20px;padding:24px;box-shadow:6px 6px 0 #000;margin-bottom:24px;display:none;}
+#addForm h2{font-family:'Fredoka One',cursive;font-size:24px;color:#0ea5e9;margin-bottom:16px;}
+#addForm input,#addForm select,#addForm textarea{width:100%;padding:10px 14px;border:3px solid #000;border-radius:10px;font-size:15px;font-family:'Nunito',Arial,sans-serif;margin-bottom:12px;outline:none;background:#f0f9ff;}
+#addForm .save-btn{background:#0ea5e9;border:3px solid #000;border-radius:50px;padding:12px 32px;color:#fff;font-size:16px;font-weight:900;cursor:pointer;font-family:'Nunito',Arial,sans-serif;}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lock">
+  <div style="font-size:60px;">🔒</div>
+  <h1>BrightWing Orders</h1>
+  <p>Oliver only. Enter password to continue.</p>
+  <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')unlock()">
+  <button onclick="unlock()">Enter</button>
+  <div class="error" id="err">Wrong password. Try again!</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="header">
+    <h1>📦 My Orders</h1>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="totalOrders">0</div><div class="stat-label">ORDERS</div></div>
+      <div class="stat"><div class="stat-num" id="totalMoney">$0</div><div class="stat-label">EARNED</div></div>
+      <div class="stat"><div class="stat-num" id="delivered">0</div><div class="stat-label">DELIVERED</div></div>
+    </div>
+  </div>
+
+  <button class="add-btn" onclick="toggleForm()">+ Add New Order</button>
+
+  <div id="addForm">
+    <h2>Add New Order</h2>
+    <input type="text" id="f-name" placeholder="Customer name">
+    <input type="text" id="f-address" placeholder="Their address">
+    <select id="f-box">
+      <option value="Mini Wing - $12">Mini Wing — $12</option>
+      <option value="Joy Box - $25">Joy Box — $25</option>
+      <option value="Big Wing Box - $40">Big Wing Box — $40</option>
+    </select>
+    <input type="text" id="f-why" placeholder="Why do they need cheering up? (optional)">
+    <button class="save-btn" onclick="addOrder()">Save Order</button>
+  </div>
+
+  <div class="orders-grid" id="ordersList"></div>
+</div>
+
+<script>
+const PASSWORD = "65870";
+
+function unlock(){
+  if(document.getElementById('pw').value === PASSWORD){
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadOrders();
+  } else {
+    document.getElementById('err').style.display = 'block';
+    document.getElementById('pw').value = '';
+  }
+}
+
+function toggleForm(){
+  const f = document.getElementById('addForm');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+}
+
+function getOrders(){ return JSON.parse(localStorage.getItem('bw-orders') || '[]'); }
+function saveOrders(o){ localStorage.setItem('bw-orders', JSON.stringify(o)); }
+
+function addOrder(){
+  const name = document.getElementById('f-name').value.trim();
+  const address = document.getElementById('f-address').value.trim();
+  const box = document.getElementById('f-box').value;
+  const why = document.getElementById('f-why').value.trim();
+  if(!name || !address){ alert('Need a name and address!'); return; }
+  const orders = getOrders();
+  orders.unshift({ id: Date.now(), name, address, box, why, status: 'pending', date: new Date().toLocaleDateString() });
+  saveOrders(orders);
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-address').value = '';
+  document.getElementById('f-why').value = '';
+  document.getElementById('addForm').style.display = 'none';
+  loadOrders();
+}
+
+function setStatus(id, status){
+  const orders = getOrders();
+  const o = orders.find(x => x.id === id);
+  if(o) o.status = status;
+  saveOrders(orders);
+  loadOrders();
+}
+
+function deleteOrder(id){
+  if(!confirm('Delete this order?')) return;
+  saveOrders(getOrders().filter(x => x.id !== id));
+  loadOrders();
+}
+
+function loadOrders(){
+  const orders = getOrders();
+  const list = document.getElementById('ordersList');
+  const price = b => b.includes('$12') ? 12 : b.includes('$25') ? 25 : 40;
+
+  document.getElementById('totalOrders').textContent = orders.length;
+  document.getElementById('delivered').textContent = orders.filter(o => o.status === 'delivered').length;
+  document.getElementById('totalMoney').textContent = '$' + orders.filter(o => o.status === 'delivered').reduce((s,o) => s + price(o.box), 0);
+
+  list.innerHTML = '';
+  if(orders.length === 0){
+    list.innerHTML = '<div style="text-align:center;color:#94a3b8;font-size:18px;font-weight:900;padding:40px;">No orders yet! Hand out those flyers! 🚲</div>';
+    return;
+  }
+  orders.forEach(o => {
+    const colors = { pending:'#fef9ee', packed:'#e0f2fe', delivered:'#dcfce7' };
+    list.innerHTML += `
+      <div class="order-card" style="border-color:${o.status==='delivered'?'#16a34a':o.status==='packed'?'#0ea5e9':'#000'}">
+        <div class="order-top">
+          <div class="order-name">${o.name}</div>
+          <div class="order-box">${o.box}</div>
+        </div>
+        <div class="order-detail"><strong>Address:</strong> ${o.address}</div>
+        ${o.why ? `<div class="order-detail"><strong>Why:</strong> ${o.why}</div>` : ''}
+        <div class="order-detail"><strong>Date:</strong> ${o.date}</div>
+        <div class="status-row">
+          <button class="status-btn btn-pending ${o.status==='pending'?'active':''}" onclick="setStatus(${o.id},'pending')">📋 Pending</button>
+          <button class="status-btn btn-packed ${o.status==='packed'?'active':''}" onclick="setStatus(${o.id},'packed')">📦 Packed</button>
+          <button class="status-btn btn-delivered ${o.status==='delivered'?'active':''}" onclick="setStatus(${o.id},'delivered')">✅ Delivered</button>
+          <button class="status-btn" style="background:#fee2e2;color:#991b1b;" onclick="deleteOrder(${o.id})">🗑️ Delete</button>
+        </div>
+      </div>`;
+  });
+}
+</script>
+</body>
+</html>
