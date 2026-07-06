@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>BrightWing — Send Joy. Change Lives.</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
@@ -181,18 +183,9 @@ footer span{color:#f59e0b;}
 <section id="map-section">
   <div class="inner">
     <h2>The BrightWing Map 🗺️</h2>
-    <div class="section-sub">See where our members are. Send them a box. Make their day.</div>
-    <div class="map-box">
-      <div class="map-placeholder">🗺️</div>
-      <h3>Interactive Map — Coming Soon!</h3>
-      <p>When you sign up, you appear on the BrightWing map. Anyone in the world can find you and send you a surprise box. The more people who sign up, the bigger the map gets.</p>
-      <div class="coming-soon">🚀 Launching Soon</div>
-      <div class="map-dots">
-        <div class="dot"><div class="dot-circle"></div>Manhattan Beach, CA</div>
-        <div class="dot"><div class="dot-circle"></div>More cities coming...</div>
-        <div class="dot"><div class="dot-circle"></div>Sign up to be on the map!</div>
-      </div>
-    </div>
+    <div class="section-sub">Real members. Real locations. Click a pin to send them a box!</div>
+    <div id="bw-map" style="height:480px;border:4px solid #000;border-radius:20px;box-shadow:6px 6px 0 #000;margin-top:30px;overflow:hidden;"></div>
+    <p style="margin-top:16px;color:#94a3b8;font-size:14px;">📍 Sign up below to add yourself to the map!</p>
   </div>
 </section>
 
@@ -260,5 +253,37 @@ footer span{color:#f59e0b;}
   <p>© 2026 <span>BrightWing</span> — A D.O.V.E LLC Company · Founded by Oliver Vo, Age 10 · Manhattan Beach, CA</p>
 </footer>
 
+<script>
+const members = [
+  { name: "Oliver Vo", age: 10, city: "Manhattan Beach, CA", disability: "Tourette Syndrome", about: "Founder of BrightWing & D.O.V.E LLC. Builds games and companies!", lat: 33.8847, lng: -118.4109 },
+  { name: "A BrightWing Member", age: "?", city: "Somewhere in the world", disability: "Sign up to be here!", about: "Join BrightWing and appear on this map!", lat: 40.7128, lng: -74.0060 },
+  { name: "A BrightWing Member", age: "?", city: "Somewhere in the world", disability: "Sign up to be here!", about: "Join BrightWing and appear on this map!", lat: 51.5074, lng: -0.1278 },
+];
+
+const map = L.map('bw-map').setView([20, 0], 2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const icon = L.divIcon({
+  className: '',
+  html: '<div style="background:#0ea5e9;border:3px solid #000;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #000;">🕊</div>',
+  iconSize: [36, 36],
+  iconAnchor: [18, 18],
+});
+
+members.forEach(m => {
+  const popup = `
+    <div style="font-family:'Nunito',Arial,sans-serif;min-width:200px;">
+      <div style="font-size:18px;font-weight:900;color:#0ea5e9;margin-bottom:4px;">${m.name}</div>
+      <div style="font-size:13px;color:#555;margin-bottom:4px;">Age ${m.age} · ${m.city}</div>
+      <div style="font-size:13px;color:#0ea5e9;font-weight:700;margin-bottom:6px;">${m.disability}</div>
+      <div style="font-size:13px;color:#333;margin-bottom:10px;">${m.about}</div>
+      <a href="#sendbox" style="background:#f59e0b;border:2px solid #000;border-radius:20px;padding:6px 16px;font-weight:900;font-size:13px;text-decoration:none;color:#000;display:inline-block;">Send a Box 📦</a>
+    </div>`;
+  L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(popup);
+});
+</script>
 </body>
 </html>
