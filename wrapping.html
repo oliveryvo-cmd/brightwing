@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BrightWing Wrapping Paper</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;font-family:Arial,sans-serif;color:#fff;gap:16px;}
+h1{font-family:'Fredoka One',cursive;font-size:28px;color:#0ea5e9;}
+p{color:#6b7280;font-size:14px;text-align:center;}
+.paper{width:850px;max-width:100%;background:#0ea5e9;display:grid;grid-template-columns:repeat(6,1fr);border:4px solid #000;box-shadow:0 0 60px rgba(14,165,233,0.4);}
+.tile{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.12);position:relative;overflow:hidden;}
+.tile-text{font-family:'Fredoka One',cursive;font-size:clamp(10px,1.6vw,15px);color:rgba(255,255,255,0.18);letter-spacing:2px;text-align:center;}
+.tile-bird{font-size:clamp(20px,3vw,34px);opacity:0.25;}
+.tile-star{font-size:clamp(18px,2.5vw,28px);color:rgba(245,158,11,0.5);}
+.tile-wave{font-size:clamp(10px,1.4vw,14px);color:rgba(255,255,255,0.15);font-family:'Fredoka One',cursive;letter-spacing:3px;}
+.btn{background:#0ea5e9;border:4px solid #000;border-radius:50px;padding:14px 40px;color:#fff;font-size:17px;font-weight:900;cursor:pointer;box-shadow:5px 5px 0 #000;font-family:'Fredoka One',cursive;letter-spacing:2px;}
+.btn:hover{opacity:0.9;}
+.instructions{background:#1a1a1a;border:2px solid #333;border-radius:12px;padding:16px 24px;font-size:13px;color:#9ca3af;max-width:600px;text-align:center;line-height:1.8;}
+.instructions strong{color:#0ea5e9;}
+</style>
+</head>
+<body>
+<h1>BrightWing Wrapping Paper 🕊</h1>
+<p>Print this and wrap your BrightWing boxes!</p>
+
+<div class="paper" id="paper"></div>
+
+<button class="btn" onclick="window.print()">🖨️ Print Wrapping Paper</button>
+
+<div class="instructions">
+  <strong>How to wrap a box:</strong><br>
+  Print this page → Cut to size → Wrap your box → Tape it up → Ship it!<br>
+  Print multiple copies for bigger boxes.
+</div>
+
+<script>
+const paper = document.getElementById('paper');
+const tiles = [
+  {type:'bird', content:'🕊'},
+  {type:'text', content:'BRIGHTWING'},
+  {type:'star', content:'⭐'},
+  {type:'wave', content:'~WAVE~'},
+  {type:'star', content:'✨'},
+  {type:'text', content:'SEND JOY'},
+  {type:'bird', content:'🕊'},
+  {type:'star', content:'💛'},
+  {type:'wave', content:'BRIGHT'},
+  {type:'bird', content:'🕊'},
+  {type:'text', content:'WING'},
+  {type:'star', content:'⭐'},
+];
+for(let i = 0; i < 48; i++){
+  const t = tiles[i % tiles.length];
+  const tile = document.createElement('div');
+  tile.className = 'tile';
+  const inner = document.createElement('div');
+  inner.className = t.type === 'bird' ? 'tile-bird' : t.type === 'star' ? 'tile-star' : t.type === 'wave' ? 'tile-wave' : 'tile-text';
+  inner.textContent = t.content;
+  tile.appendChild(inner);
+  paper.appendChild(tile);
+}
+</script>
+
+<style media="print">
+body{background:#0ea5e9;padding:0;margin:0;}
+h1,p,.btn,.instructions{display:none;}
+.paper{width:100%;height:100vh;border:none;box-shadow:none;grid-template-columns:repeat(8,1fr);}
+</style>
+</body>
+</html>
