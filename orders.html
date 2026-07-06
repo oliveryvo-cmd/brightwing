@@ -106,72 +106,81 @@ function toggleForm(){
   f.style.display = f.style.display === 'none' ? 'block' : 'none';
 }
 
-function getOrders(){ return JSON.parse(localStorage.getItem('bw-orders') || '[]'); }
-function saveOrders(o){ localStorage.setItem('bw-orders', JSON.stringify(o)); }
+const FORM_ID = '2b616t2vcf8';
+const API_KEY = 'sk_MzgzMWY3MzAtZDVhZi00MmIyLTg0YzAtYTFmZWE0ZDBlZmY2';
 
-function addOrder(){
-  const name = document.getElementById('f-name').value.trim();
-  const address = document.getElementById('f-address').value.trim();
-  const box = document.getElementById('f-box').value;
-  const why = document.getElementById('f-why').value.trim();
-  if(!name || !address){ alert('Need a name and address!'); return; }
-  const orders = getOrders();
-  orders.unshift({ id: Date.now(), name, address, box, why, status: 'pending', date: new Date().toLocaleDateString() });
-  saveOrders(orders);
-  document.getElementById('f-name').value = '';
-  document.getElementById('f-address').value = '';
-  document.getElementById('f-why').value = '';
-  document.getElementById('addForm').style.display = 'none';
-  loadOrders();
-}
+function getStatuses(){ return JSON.parse(localStorage.getItem('bw-statuses') || '{}'); }
+function saveStatuses(s){ localStorage.setItem('bw-statuses', JSON.stringify(s)); }
 
 function setStatus(id, status){
-  const orders = getOrders();
-  const o = orders.find(x => x.id === id);
-  if(o) o.status = status;
-  saveOrders(orders);
+  const s = getStatuses();
+  s[id] = status;
+  saveStatuses(s);
   loadOrders();
 }
 
-function deleteOrder(id){
-  if(!confirm('Delete this order?')) return;
-  saveOrders(getOrders().filter(x => x.id !== id));
-  loadOrders();
-}
-
-function loadOrders(){
-  const orders = getOrders();
+async function loadOrders(){
   const list = document.getElementById('ordersList');
-  const price = b => b.includes('$12') ? 12 : b.includes('$25') ? 25 : 40;
+  list.innerHTML = '<div style="text-align:center;color:#94a3b8;font-size:18px;font-weight:900;padding:40px;">Loading orders... 🕊</div>';
 
-  document.getElementById('totalOrders').textContent = orders.length;
-  document.getElementById('delivered').textContent = orders.filter(o => o.status === 'delivered').length;
-  document.getElementById('totalMoney').textContent = '$' + orders.filter(o => o.status === 'delivered').reduce((s,o) => s + price(o.box), 0);
+  try {
+    const res = await fetch(`https://app.forminit.com/api/v1/${FORM_ID}/submissions`, {
+      headers: { 'Authorization': `Bearer ${API_KEY}` }
+    });
+    const data = await res.json();
+    const submissions = data.data || data.submissions || data || [];
+    const statuses = getStatuses();
+    const price = b => (b||'').includes('$12') ? 12 : (b||'').includes('$40') ? 40 : 25;
 
-  list.innerHTML = '';
-  if(orders.length === 0){
-    list.innerHTML = '<div style="text-align:center;color:#94a3b8;font-size:18px;font-weight:900;padding:40px;">No orders yet! Hand out those flyers! 🚲</div>';
-    return;
+    const total = submissions.length;
+    const delivered = submissions.filter(s => statuses[s.token || s.id] === 'delivered').length;
+    const money = submissions.filter(s => statuses[s.token || s.id] === 'delivered').reduce((sum, s) => {
+      const box = s.data?.['Box Type'] || s['Box Type'] || '';
+      return sum + price(box);
+    }, 0);
+
+    document.getElementById('totalOrders').textContent = total;
+    document.getElementById('delivered').textContent = delivered;
+    document.getElementById('totalMoney').textContent = '$' + money;
+
+    list.innerHTML = '';
+    if(!submissions.length){
+      list.innerHTML = '<div style="text-align:center;color:#94a3b8;font-size:18px;font-weight:900;padding:40px;">No orders yet! Hand out those flyers! 🚲</div>';
+      return;
+    }
+
+    submissions.forEach(s => {
+      const d = s.data || s;
+      const id = s.token || s.id;
+      const status = statuses[id] || 'pending';
+      const name = d['Recipient Name'] || d['Your Name'] || 'Unknown';
+      const address = d['Recipient Address'] || d['address'] || '—';
+      const box = d['Box Type'] || '—';
+      const why = d['Why'] || d['why they need joy'] || '';
+      const sender = d['Your Name'] || d['Sender Name'] || '';
+      const date = s.created_at ? new Date(s.created_at).toLocaleDateString() : '—';
+      const borderColor = status==='delivered'?'#16a34a':status==='packed'?'#0ea5e9':'#000';
+
+      list.innerHTML += `
+        <div class="order-card" style="border-color:${borderColor}">
+          <div class="order-top">
+            <div class="order-name">${name}</div>
+            <div class="order-box">${box}</div>
+          </div>
+          ${sender ? `<div class="order-detail"><strong>From:</strong> ${sender}</div>` : ''}
+          <div class="order-detail"><strong>Address:</strong> ${address}</div>
+          ${why ? `<div class="order-detail"><strong>Why:</strong> ${why}</div>` : ''}
+          <div class="order-detail"><strong>Date:</strong> ${date}</div>
+          <div class="status-row">
+            <button class="status-btn btn-pending ${status==='pending'?'active':''}" onclick="setStatus('${id}','pending')">📋 Pending</button>
+            <button class="status-btn btn-packed ${status==='packed'?'active':''}" onclick="setStatus('${id}','packed')">📦 Packed</button>
+            <button class="status-btn btn-delivered ${status==='delivered'?'active':''}" onclick="setStatus('${id}','delivered')">✅ Delivered</button>
+          </div>
+        </div>`;
+    });
+  } catch(e) {
+    list.innerHTML = '<div style="text-align:center;color:#ef4444;font-size:16px;font-weight:900;padding:40px;">Could not load orders. Check your connection and try again.</div>';
   }
-  orders.forEach(o => {
-    const colors = { pending:'#fef9ee', packed:'#e0f2fe', delivered:'#dcfce7' };
-    list.innerHTML += `
-      <div class="order-card" style="border-color:${o.status==='delivered'?'#16a34a':o.status==='packed'?'#0ea5e9':'#000'}">
-        <div class="order-top">
-          <div class="order-name">${o.name}</div>
-          <div class="order-box">${o.box}</div>
-        </div>
-        <div class="order-detail"><strong>Address:</strong> ${o.address}</div>
-        ${o.why ? `<div class="order-detail"><strong>Why:</strong> ${o.why}</div>` : ''}
-        <div class="order-detail"><strong>Date:</strong> ${o.date}</div>
-        <div class="status-row">
-          <button class="status-btn btn-pending ${o.status==='pending'?'active':''}" onclick="setStatus(${o.id},'pending')">📋 Pending</button>
-          <button class="status-btn btn-packed ${o.status==='packed'?'active':''}" onclick="setStatus(${o.id},'packed')">📦 Packed</button>
-          <button class="status-btn btn-delivered ${o.status==='delivered'?'active':''}" onclick="setStatus(${o.id},'delivered')">✅ Delivered</button>
-          <button class="status-btn" style="background:#fee2e2;color:#991b1b;" onclick="deleteOrder(${o.id})">🗑️ Delete</button>
-        </div>
-      </div>`;
-  });
 }
 </script>
 </body>
