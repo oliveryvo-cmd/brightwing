@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>BrightWing — Send Joy. Change Lives.</title>
+<title>BrightWing — The Joy Box Company. Send Joy. Change Lives.</title>
+<meta name="description" content="BrightWing — The Joy Box Company. Surprise boxes packed with happiness, sent to kids with disabilities. Founded by Oliver Vo, age 10.">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -97,9 +98,46 @@ input:focus,select:focus{border-color:#0ea5e9;}
 #sendbox input,#sendbox select,#sendbox textarea{background:#e0f2fe;}
 #sendbox .submit-btn{background:#f59e0b;color:#000;}
 
-footer{background:#0c1a2e;padding:30px 20px;text-align:center;border-top:4px solid #000;}
+/* BOXES */
+#boxes{padding:80px 20px;background:#fff;border-top:4px solid #000;}
+#boxes .inner{max-width:1100px;margin:0 auto;text-align:center;}
+#boxes h2{font-family:'Fredoka One',cursive;font-size:clamp(32px,5vw,56px);margin-bottom:10px;}
+.box-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin-top:40px;}
+.box-card{background:#f0f9ff;border:4px solid #000;border-radius:20px;padding:28px 20px;box-shadow:6px 6px 0 #000;display:flex;flex-direction:column;transition:transform 0.15s;}
+.box-card:hover{transform:translateY(-6px);}
+.box-card.featured{background:#fef9ee;position:relative;}
+.box-badge{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:#f59e0b;border:3px solid #000;border-radius:50px;padding:4px 16px;font-size:12px;font-weight:900;white-space:nowrap;box-shadow:2px 2px 0 #000;}
+.box-icon{font-size:50px;margin-bottom:10px;}
+.box-name{font-family:'Fredoka One',cursive;font-size:22px;color:#0ea5e9;margin-bottom:4px;}
+.box-price{font-family:'Fredoka One',cursive;font-size:34px;color:#f59e0b;margin-bottom:12px;}
+.box-items{font-size:14px;color:#64748b;line-height:1.8;flex:1;margin-bottom:16px;}
+.box-btn{background:#0ea5e9;border:3px solid #000;border-radius:50px;padding:10px 20px;color:#fff;font-size:15px;font-weight:900;text-decoration:none;box-shadow:3px 3px 0 #000;display:inline-block;}
+
+/* FLIGHT PLAN */
+#flightplan{padding:80px 20px;background:#fef9ee;border-top:4px solid #000;}
+#flightplan .inner{max-width:960px;margin:0 auto;text-align:center;}
+#flightplan h2{font-family:'Fredoka One',cursive;font-size:clamp(32px,5vw,56px);margin-bottom:10px;}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:40px;}
+.plan-card{background:#fff;border:4px solid #000;border-radius:20px;padding:28px 20px;box-shadow:6px 6px 0 #000;}
+.plan-card.now{background:#e0f2fe;}
+.plan-stage{display:inline-block;background:#f59e0b;border:3px solid #000;border-radius:50px;padding:4px 16px;font-size:12px;font-weight:900;margin-bottom:12px;box-shadow:2px 2px 0 #000;}
+.plan-card.now .plan-stage{background:#0ea5e9;color:#fff;}
+.plan-icon{font-size:44px;margin-bottom:10px;}
+.plan-title{font-family:'Fredoka One',cursive;font-size:20px;color:#0ea5e9;margin-bottom:8px;}
+.plan-desc{font-size:14px;color:#64748b;line-height:1.6;}
+
+/* CREW CTA */
+#crew-cta{padding:80px 20px;background:#f59e0b;border-top:4px solid #000;text-align:center;}
+#crew-cta h2{font-family:'Fredoka One',cursive;font-size:clamp(32px,5vw,56px);margin-bottom:14px;}
+#crew-cta p{font-size:18px;color:#78350f;font-weight:700;max-width:560px;margin:0 auto 32px;line-height:1.8;}
+
+footer{background:#0c1a2e;padding:40px 20px 30px;text-align:center;border-top:4px solid #000;}
 footer p{color:#475569;font-size:13px;}
 footer span{color:#f59e0b;}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{color:#94a3b8;font-size:13px;font-weight:900;text-decoration:none;}
+.footer-links a:hover{color:#0ea5e9;}
+.footer-domain{font-family:'Fredoka One',cursive;font-size:18px;color:#0ea5e9;margin-bottom:8px;}
 </style>
 </head>
 <body>
@@ -108,9 +146,12 @@ footer span{color:#f59e0b;}
   <div class="nav-logo"><span class="bright">Bright</span><span class="wing">Wing</span></div>
   <div class="nav-links">
     <a href="#how">How It Works</a>
+    <a href="boxes.html">The Boxes</a>
     <a href="#map-section">Find Someone</a>
     <a href="#register">Sign Up</a>
     <a href="#sendbox">Send a Box</a>
+    <a href="crew.html">Join the Crew</a>
+    <a href="faq.html">FAQ</a>
     <a href="about.html">About Oliver</a>
   </div>
 </nav>
@@ -180,6 +221,46 @@ footer span{color:#f59e0b;}
   </div>
 </section>
 
+<!-- BOXES -->
+<section id="boxes">
+  <div class="inner">
+    <h2>The Joy Boxes 📦</h2>
+    <div class="section-sub">Four boxes. All packed by Oliver. All guaranteed to make someone's day.</div>
+    <div class="box-grid">
+      <div class="box-card">
+        <div class="box-icon">🪺</div>
+        <div class="box-name">Mini Wing</div>
+        <div class="box-price">$15</div>
+        <div class="box-items">Nee Doh · handmade slime · handwritten note from Oliver</div>
+        <a href="#sendbox" class="box-btn">Send This Box</a>
+      </div>
+      <div class="box-card featured">
+        <div class="box-badge">⭐ MOST POPULAR</div>
+        <div class="box-icon">🎁</div>
+        <div class="box-name">Joy Box</div>
+        <div class="box-price">$30</div>
+        <div class="box-items">Mini Brands · Nee Doh · slime · stickers · handwritten note from Oliver</div>
+        <a href="#sendbox" class="box-btn">Send This Box</a>
+      </div>
+      <div class="box-card">
+        <div class="box-icon">🕊</div>
+        <div class="box-name">Big Wing Box</div>
+        <div class="box-price">$50</div>
+        <div class="box-items">Labubu · Mini Brands · Nee Doh · slime · BrightWing badge · handwritten note</div>
+        <a href="#sendbox" class="box-btn">Send This Box</a>
+      </div>
+      <div class="box-card">
+        <div class="box-icon">👑</div>
+        <div class="box-name">Ultimate Wing Box</div>
+        <div class="box-price">$100</div>
+        <div class="box-items">2 Labubus · Mini Brands · Nee Doh · slime · badge · mystery item · personally signed note</div>
+        <a href="#sendbox" class="box-btn">Send This Box</a>
+      </div>
+    </div>
+    <p style="margin-top:30px;"><a href="boxes.html" style="color:#0ea5e9;font-weight:900;font-size:16px;">See everything inside each box →</a></p>
+  </div>
+</section>
+
 <!-- MAP -->
 <section id="map-section">
   <div class="inner">
@@ -190,6 +271,40 @@ footer span{color:#f59e0b;}
   </div>
 </section>
 
+<!-- FLIGHT PLAN -->
+<section id="flightplan">
+  <div class="inner">
+    <h2>The Flight Plan 🛫</h2>
+    <div class="section-sub">BrightWing starts small — but wings are made for flying.</div>
+    <div class="plan-grid">
+      <div class="plan-card now">
+        <div class="plan-stage">HAPPENING NOW</div>
+        <div class="plan-icon">🚲</div>
+        <div class="plan-title">Ladera Ranch</div>
+        <div class="plan-desc">Oliver packs every box and delivers it by bike, right to your door.</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-stage">NEXT</div>
+        <div class="plan-icon">🌴</div>
+        <div class="plan-title">Orange County</div>
+        <div class="plan-desc">Crew members in nearby cities pack and deliver boxes in their own neighborhoods.</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-stage">THEN</div>
+        <div class="plan-icon">🐻</div>
+        <div class="plan-title">All of California</div>
+        <div class="plan-desc">Boxes shipped across the state, wrapped in official BrightWing wrapping paper.</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-stage">THE DREAM</div>
+        <div class="plan-icon">🌍</div>
+        <div class="plan-title">The World</div>
+        <div class="plan-desc">A joy box for every kid with a disability, everywhere. Zero limits.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- REGISTER -->
 <section id="register">
   <div class="inner">
@@ -197,7 +312,7 @@ footer span{color:#f59e0b;}
     <div class="section-sub">Have a disability? Sign up and get on the map. The world wants to cheer you up!</div>
     <form action="https://formsubmit.co/truongnvo@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New BrightWing Member Sign Up!">
-      <input type="hidden" name="_next" value="https://oliveryvo-cmd.github.io/brightwing/thanks.html">
+      <input type="hidden" name="_next" value="https://joyboxcompany.com/thanks.html">
       <input type="hidden" name="_captcha" value="false">
       <div class="form-section">About You</div>
       <label>Your Name</label>
@@ -212,6 +327,7 @@ footer span{color:#f59e0b;}
       <input type="email" name="Email" placeholder="your@email.com" required>
       <label>Tell us about yourself!</label>
       <textarea name="About" placeholder="What do you like? What are you building? What makes you YOU?"></textarea>
+      <div style="background:#e0f2fe;border:3px solid #000;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:14px;font-weight:900;color:#0369a1;">👨‍👩‍👧 Under 18? Ask a parent before signing up — they should know you're joining the map!</div>
       <button type="submit" class="submit-btn">Add Me to the Map! 🗺️</button>
     </form>
   </div>
@@ -224,7 +340,7 @@ footer span{color:#f59e0b;}
     <div class="section-sub">Cheer up someone with a disability. They'll never see it coming.</div>
     <form action="https://formsubmit.co/truongnvo@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New BrightWing Box Order!">
-      <input type="hidden" name="_next" value="https://oliveryvo-cmd.github.io/brightwing/thanks-order.html">
+      <input type="hidden" name="_next" value="https://joyboxcompany.com/thanks-order.html">
       <input type="hidden" name="_captcha" value="false">
       <div class="form-section">Your Info</div>
       <label>Your Name</label>
@@ -253,8 +369,24 @@ footer span{color:#f59e0b;}
   </div>
 </section>
 
+<!-- CREW CTA -->
+<section id="crew-cta">
+  <h2>Join the BrightWing Crew ✊</h2>
+  <p>You don't need money to spread joy. Pack boxes, write notes, hand out flyers, or become the BrightWing captain of YOUR city.</p>
+  <a href="crew.html" class="btn-blue">Join the Crew 🕊</a>
+</section>
+
 <footer>
-  <p>© 2026 <span>BrightWing</span> — A D.O.V.E LLC Company · Founded by Oliver Vo, Age 10 · Ladera Ranch, CA</p>
+  <div class="footer-domain">joyboxcompany.com</div>
+  <div class="footer-links">
+    <a href="boxes.html">The Boxes</a>
+    <a href="crew.html">Join the Crew</a>
+    <a href="faq.html">FAQ</a>
+    <a href="about.html">About Oliver</a>
+    <a href="flyer.html">Flyer</a>
+    <a href="wrapping.html">Wrapping Paper</a>
+  </div>
+  <p>© 2026 <span>BrightWing</span> · The Joy Box Company · A D.O.V.E LLC Company · Founded by Oliver Vo, Age 10 · Ladera Ranch, CA</p>
   <p style="margin-top:12px;"><a href="orders.html" style="color:#374151;font-size:12px;text-decoration:none;">Admin</a></p>
 </footer>
 

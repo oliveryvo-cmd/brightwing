@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BrightWing Flyer — Print Me!</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;font-family:'Nunito',Arial,sans-serif;color:#fff;gap:16px;}
+h1{font-family:'Fredoka One',cursive;font-size:28px;color:#0ea5e9;}
+.hint{color:#6b7280;font-size:14px;text-align:center;}
+
+.flyer{width:600px;max-width:100%;background:#f0f9ff;color:#1a1a1a;border:6px solid #000;padding:40px 32px;text-align:center;box-shadow:0 0 60px rgba(14,165,233,0.4);}
+.flyer .bird{font-size:64px;}
+.flyer h2{font-family:'Fredoka One',cursive;font-size:52px;letter-spacing:2px;margin:8px 0 4px;}
+.flyer h2 .bright{color:#0ea5e9;}
+.flyer h2 .wing{color:#f59e0b;}
+.flyer .tag{font-size:19px;font-weight:900;color:#0369a1;margin-bottom:20px;}
+.flyer .what{background:#fff;border:4px solid #000;border-radius:16px;padding:18px 20px;margin-bottom:16px;font-size:16px;font-weight:700;line-height:1.8;color:#444;box-shadow:4px 4px 0 #000;}
+.flyer .what strong{color:#0ea5e9;}
+.flyer .prices{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.flyer .price{background:#fef9ee;border:3px solid #000;border-radius:50px;padding:6px 16px;font-weight:900;font-size:14px;box-shadow:2px 2px 0 #000;}
+.flyer .cta{background:#f59e0b;border:4px solid #000;border-radius:16px;padding:16px;font-family:'Fredoka One',cursive;font-size:24px;box-shadow:4px 4px 0 #000;margin-bottom:14px;}
+.flyer .site{font-family:'Fredoka One',cursive;font-size:28px;color:#0ea5e9;letter-spacing:1px;}
+.flyer .small{font-size:13px;color:#94a3b8;font-weight:700;margin-top:10px;}
+
+.btn{background:#0ea5e9;border:4px solid #000;border-radius:50px;padding:14px 40px;color:#fff;font-size:17px;font-weight:900;cursor:pointer;box-shadow:5px 5px 0 #000;font-family:'Fredoka One',cursive;letter-spacing:2px;}
+.btn:hover{opacity:0.9;}
+a.back{color:#6b7280;font-size:13px;}
+
+@media print{
+  body{background:#fff;padding:0;}
+  h1,.hint,.btn,a.back{display:none;}
+  .flyer{box-shadow:none;width:100%;border-width:4px;}
+}
+</style>
+</head>
+<body>
+
+<h1>BrightWing Flyer 🕊</h1>
+<p class="hint">Print it, cut it, hand it out at school, tape it to mailboxes (ask first!) — spread the word.</p>
+
+<div class="flyer">
+  <div class="bird">🕊</div>
+  <h2><span class="bright">Bright</span><span class="wing">Wing</span></h2>
+  <div class="tag">The Joy Box Company</div>
+  <div class="what">
+    Know a kid who could use some cheering up?<br>
+    <strong>Send them a surprise JOY BOX</strong> — toys, handmade slime, Nee Doh, Labubus & a handwritten note.<br>
+    Delivered by bike, right to their door. 🚲
+  </div>
+  <div class="prices">
+    <div class="price">🪺 Mini Wing $15</div>
+    <div class="price">🎁 Joy Box $30</div>
+    <div class="price">🕊 Big Wing $50</div>
+    <div class="price">👑 Ultimate $100</div>
+  </div>
+  <div class="cta">Order at 👇</div>
+  <div class="site">joyboxcompany.com</div>
+  <div class="small">Cash on delivery · Ladera Ranch, CA · Founded by Oliver Vo, Age 10</div>
+</div>
+
+<button class="btn" onclick="window.print()">🖨️ Print Flyer</button>
+<a href="index.html" class="back">← Back to BrightWing</a>
+
+</body>
+</html>

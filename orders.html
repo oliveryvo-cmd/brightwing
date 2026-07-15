@@ -76,9 +76,10 @@ body{background:#f0f9ff;font-family:'Nunito',Arial,sans-serif;min-height:100vh;p
     <input type="text" id="f-name" placeholder="Customer name">
     <input type="text" id="f-address" placeholder="Their address">
     <select id="f-box">
-      <option value="Mini Wing - $12">Mini Wing — $12</option>
-      <option value="Joy Box - $25">Joy Box — $25</option>
-      <option value="Big Wing Box - $40">Big Wing Box — $40</option>
+      <option value="Mini Wing - $15">Mini Wing — $15</option>
+      <option value="Joy Box - $30">Joy Box — $30</option>
+      <option value="Big Wing Box - $50">Big Wing Box — $50</option>
+      <option value="Ultimate Wing Box - $100">Ultimate Wing Box — $100</option>
     </select>
     <input type="text" id="f-why" placeholder="Why do they need cheering up? (optional)">
     <button class="save-btn" onclick="addOrder()">Save Order</button>
@@ -142,7 +143,7 @@ function deleteOrder(id){
 function loadOrders(){
   const orders = getOrders();
   const list = document.getElementById('ordersList');
-  const price = b => b.includes('$12') ? 12 : b.includes('$40') ? 40 : 25;
+  const price = b => b.includes('$15') ? 15 : b.includes('$30') ? 30 : b.includes('$50') ? 50 : b.includes('$100') ? 100 : b.includes('$12') ? 12 : b.includes('$40') ? 40 : 25;
 
   document.getElementById('totalOrders').textContent = orders.length;
   document.getElementById('delivered').textContent = orders.filter(o => o.status === 'delivered').length;

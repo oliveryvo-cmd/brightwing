@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Joy Boxes — BrightWing</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f9ff;color:#1a1a1a;font-family:'Nunito',Arial,sans-serif;}
+
+nav{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:4px solid #000;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:30px;letter-spacing:2px;text-decoration:none;}
+.nav-logo .bright{color:#0ea5e9;}
+.nav-logo .wing{color:#f59e0b;}
+.nav-links{display:flex;gap:24px;flex-wrap:wrap;}
+.nav-links a{color:#1a1a1a;text-decoration:none;font-size:15px;font-weight:900;border-bottom:3px solid transparent;}
+.nav-links a:hover{border-color:#0ea5e9;}
+
+.hero{background:linear-gradient(180deg,#e0f2fe 0%,#f0f9ff 100%);padding:70px 20px;text-align:center;border-bottom:4px solid #000;}
+.hero .icon{font-size:80px;margin-bottom:16px;animation:bounce 1.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero h1{font-family:'Fredoka One',cursive;font-size:clamp(42px,7vw,72px);color:#0ea5e9;margin-bottom:12px;}
+.hero p{font-size:19px;color:#0369a1;font-weight:900;}
+
+.content{max-width:860px;margin:0 auto;padding:60px 20px;}
+
+.box{background:#fff;border:4px solid #000;border-radius:20px;padding:36px;box-shadow:6px 6px 0 #000;margin-bottom:40px;position:relative;}
+.box.featured{background:#fef9ee;}
+.box-badge{position:absolute;top:-18px;left:36px;background:#f59e0b;border:3px solid #000;border-radius:50px;padding:5px 18px;font-size:13px;font-weight:900;box-shadow:2px 2px 0 #000;}
+.box-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.box-title{font-family:'Fredoka One',cursive;font-size:34px;color:#0ea5e9;}
+.box-title .icon{margin-right:10px;}
+.box-price{font-family:'Fredoka One',cursive;font-size:40px;color:#f59e0b;}
+.box-desc{font-size:17px;color:#64748b;line-height:1.8;margin-bottom:24px;}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px;}
+.item{background:#f0f9ff;border:3px solid #000;border-radius:14px;padding:16px;text-align:center;}
+.box.featured .item{background:#fff;}
+.item-icon{font-size:32px;margin-bottom:6px;}
+.item-name{font-weight:900;font-size:14px;color:#0369a1;}
+.order-btn{background:#0ea5e9;border:4px solid #000;border-radius:50px;padding:14px 36px;color:#fff;font-size:17px;font-weight:900;text-decoration:none;box-shadow:5px 5px 0 #000;display:inline-block;transition:transform 0.1s,box-shadow 0.1s;}
+.order-btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #000;}
+
+.info-strip{background:#0ea5e9;border:4px solid #000;border-radius:20px;padding:28px;box-shadow:6px 6px 0 #000;margin-bottom:40px;text-align:center;}
+.info-strip p{color:#fff;font-weight:900;font-size:16px;line-height:1.9;}
+
+footer{background:#0c1a2e;padding:30px 20px;text-align:center;border-top:4px solid #000;}
+footer p{color:#475569;font-size:13px;}
+footer span{color:#f59e0b;}
+footer a{color:#94a3b8;font-weight:900;text-decoration:none;font-size:13px;margin:0 10px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="bright">Bright</span><span class="wing">Wing</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#sendbox">Send a Box</a>
+    <a href="crew.html">Join the Crew</a>
+    <a href="faq.html">FAQ</a>
+    <a href="about.html">About Oliver</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="icon">📦</div>
+  <h1>The Joy Boxes</h1>
+  <p>Every box is packed by Oliver himself. No two boxes are ever the same.</p>
+</div>
+
+<div class="content">
+
+  <div class="info-strip">
+    <p>🚲 Delivered by bike in Ladera Ranch, CA · 💵 Pay cash when the box arrives · ✍️ Every box includes a real handwritten note</p>
+  </div>
+
+  <div class="box">
+    <div class="box-head">
+      <div class="box-title"><span class="icon">🪺</span>Mini Wing</div>
+      <div class="box-price">$15</div>
+    </div>
+    <p class="box-desc">The perfect little pick-me-up. Small box, big smile — great for a "thinking of you" surprise.</p>
+    <div class="items">
+      <div class="item"><div class="item-icon">🫧</div><div class="item-name">Nee Doh</div></div>
+      <div class="item"><div class="item-icon">🌀</div><div class="item-name">Handmade Slime</div></div>
+      <div class="item"><div class="item-icon">💌</div><div class="item-name">Handwritten Note from Oliver</div></div>
+    </div>
+    <a href="index.html#sendbox" class="order-btn">Send a Mini Wing 🪺</a>
+  </div>
+
+  <div class="box featured">
+    <div class="box-badge">⭐ MOST POPULAR</div>
+    <div class="box-head">
+      <div class="box-title"><span class="icon">🎁</span>Joy Box</div>
+      <div class="box-price">$30</div>
+    </div>
+    <p class="box-desc">The classic. The one that started it all. A full load of joy that turns a bad week into a great one.</p>
+    <div class="items">
+      <div class="item"><div class="item-icon">🛒</div><div class="item-name">Mini Brands</div></div>
+      <div class="item"><div class="item-icon">🫧</div><div class="item-name">Nee Doh</div></div>
+      <div class="item"><div class="item-icon">🌀</div><div class="item-name">Handmade Slime</div></div>
+      <div class="item"><div class="item-icon">✨</div><div class="item-name">Stickers</div></div>
+      <div class="item"><div class="item-icon">💌</div><div class="item-name">Handwritten Note from Oliver</div></div>
+    </div>
+    <a href="index.html#sendbox" class="order-btn">Send a Joy Box 🎁</a>
+  </div>
+
+  <div class="box">
+    <div class="box-head">
+      <div class="box-title"><span class="icon">🕊</span>Big Wing Box</div>
+      <div class="box-price">$50</div>
+    </div>
+    <p class="box-desc">Now we're flying. Everything in the Joy Box PLUS a Labubu and an official BrightWing badge.</p>
+    <div class="items">
+      <div class="item"><div class="item-icon">🧸</div><div class="item-name">Labubu</div></div>
+      <div class="item"><div class="item-icon">🛒</div><div class="item-name">Mini Brands</div></div>
+      <div class="item"><div class="item-icon">🫧</div><div class="item-name">Nee Doh</div></div>
+      <div class="item"><div class="item-icon">🌀</div><div class="item-name">Handmade Slime</div></div>
+      <div class="item"><div class="item-icon">🏅</div><div class="item-name">BrightWing Badge</div></div>
+      <div class="item"><div class="item-icon">💌</div><div class="item-name">Handwritten Note from Oliver</div></div>
+    </div>
+    <a href="index.html#sendbox" class="order-btn">Send a Big Wing Box 🕊</a>
+  </div>
+
+  <div class="box">
+    <div class="box-head">
+      <div class="box-title"><span class="icon">👑</span>Ultimate Wing Box</div>
+      <div class="box-price">$100</div>
+    </div>
+    <p class="box-desc">The legend. The biggest joy delivery BrightWing makes. TWO Labubus, a mystery item nobody knows about until they open it, and a personally signed note from the founder himself.</p>
+    <div class="items">
+      <div class="item"><div class="item-icon">🧸</div><div class="item-name">2 Labubus</div></div>
+      <div class="item"><div class="item-icon">🛒</div><div class="item-name">Mini Brands</div></div>
+      <div class="item"><div class="item-icon">🫧</div><div class="item-name">Nee Doh</div></div>
+      <div class="item"><div class="item-icon">🌀</div><div class="item-name">Handmade Slime</div></div>
+      <div class="item"><div class="item-icon">🏅</div><div class="item-name">BrightWing Badge</div></div>
+      <div class="item"><div class="item-icon">❓</div><div class="item-name">Mystery Item</div></div>
+      <div class="item"><div class="item-icon">✍️</div><div class="item-name">Personally Signed Note</div></div>
+    </div>
+    <a href="index.html#sendbox" class="order-btn">Send the Ultimate 👑</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="index.html">Home</a> · <a href="crew.html">Join the Crew</a> · <a href="faq.html">FAQ</a> · <a href="about.html">About Oliver</a></p>
+  <p style="margin-top:12px;">© 2026 <span>BrightWing</span> · The Joy Box Company · joyboxcompany.com · Founded by Oliver Vo, Age 10</p>
+</footer>
+
+</body>
+</html>

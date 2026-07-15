@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FAQ — BrightWing</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f9ff;color:#1a1a1a;font-family:'Nunito',Arial,sans-serif;}
+
+nav{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:4px solid #000;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:30px;letter-spacing:2px;text-decoration:none;}
+.nav-logo .bright{color:#0ea5e9;}
+.nav-logo .wing{color:#f59e0b;}
+.nav-links{display:flex;gap:24px;flex-wrap:wrap;}
+.nav-links a{color:#1a1a1a;text-decoration:none;font-size:15px;font-weight:900;border-bottom:3px solid transparent;}
+.nav-links a:hover{border-color:#0ea5e9;}
+
+.hero{background:linear-gradient(180deg,#e0f2fe 0%,#f0f9ff 100%);padding:70px 20px;text-align:center;border-bottom:4px solid #000;}
+.hero .icon{font-size:80px;margin-bottom:16px;}
+.hero h1{font-family:'Fredoka One',cursive;font-size:clamp(42px,7vw,72px);color:#0ea5e9;margin-bottom:12px;}
+.hero p{font-size:19px;color:#0369a1;font-weight:900;}
+
+.content{max-width:760px;margin:0 auto;padding:60px 20px;}
+
+.faq{background:#fff;border:4px solid #000;border-radius:20px;box-shadow:6px 6px 0 #000;margin-bottom:24px;overflow:hidden;}
+.faq summary{font-family:'Fredoka One',cursive;font-size:20px;color:#0ea5e9;padding:22px 28px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';font-size:28px;color:#f59e0b;flex-shrink:0;}
+.faq[open] summary::after{content:'−';}
+.faq .answer{padding:0 28px 24px;font-size:16px;color:#555;line-height:1.9;}
+.faq .answer strong{color:#0369a1;}
+
+.cta{text-align:center;padding:40px 20px;}
+.btn-blue{background:#0ea5e9;border:4px solid #000;border-radius:50px;padding:16px 40px;color:#fff;font-size:19px;font-weight:900;text-decoration:none;box-shadow:5px 5px 0 #000;display:inline-block;margin:8px;}
+.btn-yellow{background:#f59e0b;border:4px solid #000;border-radius:50px;padding:16px 40px;color:#000;font-size:19px;font-weight:900;text-decoration:none;box-shadow:5px 5px 0 #000;display:inline-block;margin:8px;}
+
+footer{background:#0c1a2e;padding:30px 20px;text-align:center;border-top:4px solid #000;}
+footer p{color:#475569;font-size:13px;}
+footer span{color:#f59e0b;}
+footer a{color:#94a3b8;font-weight:900;text-decoration:none;font-size:13px;margin:0 10px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="bright">Bright</span><span class="wing">Wing</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="boxes.html">The Boxes</a>
+    <a href="crew.html">Join the Crew</a>
+    <a href="about.html">About Oliver</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="icon">🤔</div>
+  <h1>Questions?</h1>
+  <p>Everything you want to know about BrightWing, answered by the founder.</p>
+</div>
+
+<div class="content">
+
+  <details class="faq" open>
+    <summary>What is BrightWing?</summary>
+    <div class="answer">BrightWing is <strong>The Joy Box Company</strong> — we connect kids with disabilities to people who want to cheer them up. You pick someone, order a joy box, and we deliver a surprise straight to their door. Founded by Oliver Vo, age 10, who has Tourette syndrome and knows exactly how much a surprise can change your day.</div>
+  </details>
+
+  <details class="faq">
+    <summary>Who can sign up to receive boxes?</summary>
+    <div class="answer">Anyone with a disability! Tourette's, ADHD, autism, cerebral palsy, anything — visible or invisible. You only share what you're comfortable sharing. <strong>If you're under 18, ask a parent first.</strong></div>
+  </details>
+
+  <details class="faq">
+    <summary>How much does a box cost?</summary>
+    <div class="answer">There are four boxes: <strong>Mini Wing ($15)</strong>, <strong>Joy Box ($30)</strong>, <strong>Big Wing Box ($50)</strong>, and the <strong>Ultimate Wing Box ($100)</strong>. Check out <a href="boxes.html" style="color:#0ea5e9;font-weight:900;">The Boxes page</a> to see everything inside each one.</div>
+  </details>
+
+  <details class="faq">
+    <summary>Where do you deliver?</summary>
+    <div class="answer">Right now: <strong>Ladera Ranch, California</strong> — Oliver delivers every box personally, by bike. But check out the Flight Plan on the home page: Orange County is next, then all of California, then the world. 🌍</div>
+  </details>
+
+  <details class="faq">
+    <summary>How do I pay?</summary>
+    <div class="answer"><strong>Cash on delivery.</strong> You don't pay anything online — you pay when Oliver shows up at your door with the box. Simple and safe.</div>
+  </details>
+
+  <details class="faq">
+    <summary>Who packs the boxes?</summary>
+    <div class="answer">Oliver packs every single box himself, and writes every note by hand. The slime is handmade too. No two boxes are ever the same — every one is a surprise.</div>
+  </details>
+
+  <details class="faq">
+    <summary>I don't live nearby. How can I help?</summary>
+    <div class="answer">Join the <a href="crew.html" style="color:#0ea5e9;font-weight:900;">BrightWing Crew</a>! You can spread the word, and when BrightWing reaches your city, you could become a City Captain — the person who packs and delivers joy boxes in YOUR neighborhood.</div>
+  </details>
+
+  <details class="faq">
+    <summary>Is BrightWing a real company?</summary>
+    <div class="answer">Yes! BrightWing is part of <strong>D.O.V.E LLC</strong>, founded by Oliver Vo. Oliver has started 11 companies — but BrightWing is the one built to change lives.</div>
+  </details>
+
+  <div class="cta">
+    <a href="index.html#sendbox" class="btn-yellow">Send Someone a Box 📦</a>
+    <a href="index.html#register" class="btn-blue">Join the Map 🗺️</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="index.html">Home</a> · <a href="boxes.html">The Boxes</a> · <a href="crew.html">Join the Crew</a> · <a href="about.html">About Oliver</a></p>
+  <p style="margin-top:12px;">© 2026 <span>BrightWing</span> · The Joy Box Company · joyboxcompany.com · Founded by Oliver Vo, Age 10</p>
+</footer>
+
+</body>
+</html>
